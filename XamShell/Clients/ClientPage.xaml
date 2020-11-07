@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XamShell.Clients"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             x:Class="XamShell.Clients.ClientPage"
+             ios:Page.UseSafeArea="true">
+    <Shell.SearchHandler>
+        <local:ClientSearchHandler Placeholder="Client's Name"
+                                   ShowsResults="True"
+                                   DisplayMemberName="Name"/>
+    </Shell.SearchHandler>
+
+    <ContentPage.Content>
+         <Grid Padding="20">
+            <RefreshView x:DataType="local:ClientViewModel" Command="{Binding LoadClientsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                <CollectionView x:Name="ClientsListView" ItemsSource="{Binding Clients}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="10" x:DataType="local:Client">
+                                <Label Text="{Binding Name}" LineBreakMode="NoWrap" FontSize="16" />
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Source={RelativeSource AncestorType={x:Type local:ClientViewModel}}, Path=ClientTappedCommand}" CommandParameter="{Binding .}">
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
+            <Button Text="New"
+                Command="{Binding AddClientCommand}"
+                WidthRequest="80"
+                HeightRequest="80"
+                CornerRadius="40"
+                HorizontalOptions="Center"
+                VerticalOptions="End" />    
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

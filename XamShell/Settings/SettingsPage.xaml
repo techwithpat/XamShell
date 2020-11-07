@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamShell.Settings.SettingsPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             Shell.TabBarIsVisible="False">   
+    <ContentPage.Content>
+         <Grid Padding="20">
+            <Label Text="Settings" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

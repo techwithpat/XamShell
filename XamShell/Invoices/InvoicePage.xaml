@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XamShell.Invoices"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             x:Class="XamShell.Invoices.InvoicePage"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <Grid Padding="10">            
+            <RefreshView x:DataType="local:InvoiceViewModel" Command="{Binding LoadInvoicesCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                <CollectionView x:Name="InvoiceListView" ItemsSource="{Binding Invoices}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10" x:DataType="local:Invoice">                             
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Column="0" Grid.Row="0" Text="{Binding Name}" />
+                                <Label Grid.Column="0" Grid.Row="1" Text="{Binding Number, StringFormat='#Invoice {0}'}" LineBreakMode="NoWrap" FontSize="Micro" />
+                                <Label Grid.Column="1" Grid.Row="0" Text="{Binding Amount, StringFormat='{0:c}'}" LineBreakMode="NoWrap" HorizontalTextAlignment="End" FontSize="16" />                            
+                                <Label Grid.Column="1" Grid.Row="1" Text="{Binding Created, StringFormat='{0:d}'}" HorizontalTextAlignment="End" FontSize="Micro" />                                
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            <Button Text="New"
+                    Command="{Binding AddInvoiceCommand}"
+                    WidthRequest="80"
+                    HeightRequest="80"
+                    CornerRadius="40"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End" />          
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:inv="clr-namespace:XamShell.Invoices"
+             xmlns:clients="clr-namespace:XamShell.Clients"           
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamShell.AppShell"
+             FlyoutBackgroundColor="{StaticResource Secondary}">
+   
+   <Shell.FlyoutHeaderTemplate>
+       <DataTemplate>
+           <Grid BackgroundColor="{StaticResource Primary}" Padding="20">
+               <Label Text="Invoice App"
+                      TextColor="White"
+                      HorizontalTextAlignment="Center"
+                      VerticalTextAlignment="Center" />
+           </Grid>
+       </DataTemplate>
+   </Shell.FlyoutHeaderTemplate>
+
+    <FlyoutItem Title="Invoices" Icon="invoice.png">
+        <ShellContent Title="Business" ContentTemplate="{DataTemplate inv:InvoicePage}" />           
+        <ShellContent Title="Personal" ContentTemplate="{DataTemplate inv:PersonalInvoicePage}"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Clients" Icon="people.png">
+        <ShellContent ContentTemplate="{DataTemplate clients:ClientPage}"/>
+    </FlyoutItem>
+
+    <MenuItem Text="Settings" IconImageSource="settings.png" Command="{Binding SettingsCommand}" />
+    <MenuItem Text="Help" IconImageSource="help.png" Command="{Binding HelpCommand}" />
+    
+</Shell>
